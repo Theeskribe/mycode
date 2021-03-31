@@ -14,12 +14,12 @@ matplotlib.use('Agg')
 # sudo apt install python3-tk
 import matplotlib.pyplot as plt
 
-def parsecsvdata():
+def parsecsvdata(inputfile):
     """returns a list. [0] is LAN and [1] is WAN data"""
     summary = [] # list that will contain [(LAN), (WAN)]
 
     # open csv data
-    with open(INPUTFILE, "r") as downtime:
+    with open(inputfile, "r") as downtime:
         # parse csv data with csv.reader
         downdata = csv.reader(downtime, delimiter=",")
         for row in downdata:
@@ -31,7 +31,7 @@ def parsecsvdata():
 def main():
     N = 4
     ## grab your data
-    summary = parsecsvdata() # grab our data from file
+    summary = parsecsvdata(INPUTFILE) # grab our data from file
     localnetMeans = summary[0] # LAN length of outage (mins)
     wanMeans = summary[1] # WAN length of outage (mins)
 
@@ -56,5 +56,6 @@ def main():
     # plt.show() # you can try this on a Python IDE with a GUI if you'd like
     plt.savefig(OUTPUTFILE)
     print("Graph created: " +  OUTPUTFILE)
+
 if __name__ == "__main__":
     main()
