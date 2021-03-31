@@ -5,6 +5,7 @@ OUTPUTFILE = "/home/student/mycode/graphing/2018summaryv2.png"
 
 # from python std library
 import csv
+import os
 
 # python -m pip install np
 import numpy as np
@@ -52,10 +53,13 @@ def main():
     plt.yticks(np.arange(0, 81, 10))
     plt.legend((p1[0], p2[0]), ("LAN", "WAN"))
 
-    # display the graph
-    # plt.show() # you can try this on a Python IDE with a GUI if you'd like
+    # check if PNG file exists from previous run
+    if os.path.isfile(OUTPUTFILE):
+        os.remove(OUTPUTFILE)
+    # save the new outputfile to disk
     plt.savefig(OUTPUTFILE)
-    print("Graph created: " +  OUTPUTFILE)
+    
+print("Graph created: " +  OUTPUTFILE)
 
 if __name__ == "__main__":
     main()
