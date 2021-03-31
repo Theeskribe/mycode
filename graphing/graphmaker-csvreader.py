@@ -33,8 +33,15 @@ def main():
     N = 4
     ## grab your data
     summary = parsecsvdata(INPUTFILE) # grab our data from file
-    localnetMeans = summary[0] # LAN length of outage (mins)
-    wanMeans = summary[1] # WAN length of outage (mins)
+    
+    # convert WAN data from STRING to INT for WAN outage list
+    localnetMeans = list(map(int,summary[0]))
+    # convert WAN data from STRING to INT for WAN outage list
+    wanMeans = list(map(int,summary[1]))
+
+    # print out local inputdata vars for script debug
+    print(f"localnetMeans = {localnetMeans}")
+    print(f"wanMeans = {localnetMeans}")
 
     ind = np.arange(N)          # the x locations for the groups
     # width of the bars: can also be len(x) sequence
@@ -58,8 +65,7 @@ def main():
         os.remove(OUTPUTFILE)
     # save the new outputfile to disk
     plt.savefig(OUTPUTFILE)
-    
-print("Graph created: " +  OUTPUTFILE)
+    print("Graph created: " +  OUTPUTFILE)
 
 if __name__ == "__main__":
     main()
